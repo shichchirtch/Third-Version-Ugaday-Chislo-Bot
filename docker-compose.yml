@@ -1,0 +1,36 @@
+services:
+  main_bot:
+    build:
+      context: .
+    env_file: 
+      - env/main.env
+    restart: on-failure
+    volumes:
+      - ./app:/app
+    depends_on:
+      - postgres_main
+
+  postgres_main:
+    image: postgres:16.2
+    env_file: 
+      - env/postgres.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@yandex.ru
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - 5050:80
+    restart: unless-stopped
+    depends_on:
+      - postgres_main
+  
+volumes:
+  postgres_data:
+  pgadmin:
