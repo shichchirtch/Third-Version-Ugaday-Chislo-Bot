@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11.7
     # stdout и stderr, отправляются прямо на терминал
 ENV PYTHONUNBUFFERED=1 \
     # предотвращает создание python файлов .pyc
