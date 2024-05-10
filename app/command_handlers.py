@@ -4,8 +4,6 @@ from keyboards import *
 from lexicon import start_greeding, language_dict
 from aiogram.types import Message
 from aiogram.types import ReplyKeyboardRemove
-
-from bot_base import General
 from external_functions import (insert_new_user_in_general_table, verify_that_user_into_general,
                                 verify_INGAME_status, cancel_update, get_user_quantity_games,
                                 insert_new_user_in_game_table)

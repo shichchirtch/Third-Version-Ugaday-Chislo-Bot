@@ -2,18 +2,14 @@ from aiogram import Router, F
 from filters import *
 from keyboards import *
 from lexicon import positiv_answer, language_dict, negative_answer
-from aiogram.types import  Message, ReplyKeyboardRemove, ContentType
+from aiogram.types import Message, ReplyKeyboardRemove, ContentType
 from external_functions import (verify_INGAME_status, choosing_number,
                                 verify_that_user_into_general,
                                 get_secret_number, check_user_previous_schritt,
                                 update_after_user_wins, minus_one_attempt,
                                 update_game_table, cancel_update, insert_user_number_in_game_table,
                                 check_attempts_lost_number)
-import time
-
-from bot_base import General
-
-
+import asyncio
 
 user_router = Router()
 @user_router.message(F.content_type != ContentType.TEXT)
@@ -100,7 +96,7 @@ async def process_numbers_answer(message: Message):
                                  language_dict['no att lost'] +
                                  str(secret_number),
                                  reply_markup=keyboard_after_fail)
-            time.sleep(1)
+            await asyncio.sleep(1)
 
     else:
         await message.answer(text=language_dict['in game false'],
